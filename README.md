@@ -54,3 +54,13 @@ uv run pytest
 - updated `reports/eval_summary.md` (filled in)
 
 See `architecture.md` for minimum requirements + stretch goals.
+
+
+
+## Day 3 – What I did
+Trained a baseline classification model and evaluated it on a holdout set
+Computed core evaluation metrics (accuracy, precision, recall, F1, ROC AUC)
+Added a bootstrap confidence interval for ROC AUC
+Saved holdout predictions and feature-only holdout input tables
+Created an input schema contract from training data
+Logged run metadata and registered the latest run for reproducibility
