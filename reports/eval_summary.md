@@ -1,21 +1,28 @@
 # Evaluation Summary — Week 3
 
-Fill this in after training a model.
-
 ## What you trained
-- Model family:
+- Model family: Logistic Regression
 - Preprocessing:
+  - Numerical features: median imputation
+  - Categorical features: most-frequent imputation + one-hot encoding
 - Key hyperparameters:
+  - max_iter = 500
 
 ## Results
 - Baseline metrics:
+  - ROC-AUC ≈ 0.50 (dummy classifier)
 - Holdout metrics:
-- Confidence intervals (optional):
+  - ROC-AUC = 1.00
+- Confidence intervals:
+  - Not computed
 
 ## Error analysis
-- Worst cases:
-- Any obvious leakage?
-- Next data fixes to try:
+- Worst cases occur for users near the decision threshold.
+- Potential target leakage from `total_amount`, which is closely related to the target.
+- Small dataset size may inflate performance metrics.
 
 ## Recommendation
-Would you ship this baseline? Why/why not?
+- Do not ship this model to production yet.
+- This model is a strong baseline for comparison.
+- Additional data and leakage mitigation are required before deployment.
+
