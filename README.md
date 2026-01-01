@@ -1,46 +1,46 @@
 # Week 3 — Ship-Ready Baseline ML System (Train + Evaluate + Predict)
 
-Turn a feature table into a **reproducible, CPU-friendly ML baseline** with:
-- a training command that saves versioned artifacts, and
-- a batch prediction command with schema guardrails.
+Turn a feature table into a reproducible, CPU-friendly machine learning baseline that supports training, evaluation, and batch prediction.
 
-This repo is designed to be:
-- **offline-first** (no external services required),
-- **reproducible** (run metadata + environment capture),
-- **portfolio-ready** (clean structure + model card).
+This project is designed to be:
+- offline-first (no external services required)
+- reproducible (saved run metadata and artifacts)
+- suitable for academic evaluation and portfolio presentation
 
 ---
 
 ## Quickstart
 
 ### 1) Setup
-```bash
-uv sync
+Install all required dependencies.
+Command:
+- uv sync
 
-### Create sample data
-uv run ml-baseline make-sample-data
-data/processed/features.csv
+### 2) Create sample data
+Generate a small processed feature table used for training and prediction.
+Command:
+- uv run ml-baseline make-sample-data
+Output:
+- data/processed/features.csv
 
-###Train a baseline model
-uv run ml-baseline train
-Training artifacts are saved to:
-
-models/runs/<run_id>/
-models/registry/latest.txt (points to the latest trained model)
-
-###  Batch prediction
-uv run ml-baseline predict data/processed/features.csv
-
-Predictions are written to the outputs/ directory.
-###  Run tests
-uv run pytest 
-
+### 3) Train a baseline model
+Train a baseline classification model (requires specifying the target column).
+Command:
+- uv run ml-baseline train --target is_high_value
 Outputs:
+- models/runs/<run_id>/
+- models/registry/latest.txt (points to the latest trained model)
+- reports/eval_summary.md
+- reports/model_card.md
 
-Trained runs: models/runs/
-Latest run pointer: models/registry/latest.txt
-Evaluation reports: reports/eval_summary.md, reports/model_card.md
-Prediction outputs: outputs/
+### 4) Batch prediction
+Run batch predictions using the saved run.
+Command:
+- uv run ml-baseline predict data/processed/features.csv
+Output:
+- outputs/
 
-
-
+### 5) Run tests
+Run automated tests to verify training/prediction and schema validation.
+Command:
+- uv run pytest
