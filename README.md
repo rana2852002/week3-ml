@@ -16,43 +16,31 @@ This repo is designed to be:
 ### 1) Setup
 ```bash
 uv sync
-```
 
-### 2) Create sample data (if needed)
-```bash
+### Create sample data
 uv run ml-baseline make-sample-data
-```
+data/processed/features.csv
 
-This writes a small demo feature table to:
-- `data/processed/features.csv` (and `.parquet` if available)
+###Train a baseline model
+uv run ml-baseline train
+Training artifacts are saved to:
 
-### 3) Train a baseline model
-```bash
-uv run ml-baseline train --target is_high_value
-```
+models/runs/<run_id>/
+models/registry/latest.txt (points to the latest trained model)
 
-Artifacts are written to:
-- `models/runs/<run_id>/...`
-- `models/registry/latest.txt` points to the most recent run
+###  Batch prediction
+uv run ml-baseline predict data/processed/features.csv
 
-### 4) Batch predict
-```bash
-uv run ml-baseline predict --run latest --input data/processed/features.csv --output outputs/preds.csv
-```
+Predictions are written to the outputs/ directory.
+###  Run tests
+uv run pytest 
 
-### 5) Tests
-```bash
-uv run pytest
-```
+Outputs:
 
----
+Trained runs: models/runs/
+Latest run pointer: models/registry/latest.txt
+Evaluation reports: reports/eval_summary.md, reports/model_card.md
+Prediction outputs: outputs/
 
-## What you submit
-- working code (`src/`)
-- passing tests (`tests/`)
-- updated `reports/model_card.md` (filled in)
-- updated `reports/eval_summary.md` (filled in)
-
-See `architecture.md` for minimum requirements + stretch goals.
 
 
